@@ -1,0 +1,22 @@
+name: 'pr verify'
+
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  build-msvc:
+    name: 'test build (windows, msvc)'
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: PowerShell
+        shell: pwsh
+        run: .\test.ps1
+      - name: Upload Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: yuzu-msvc-pr${{ github.event.number }}-${{ env.BUILD_TAG }}
+          path: artifacts/
