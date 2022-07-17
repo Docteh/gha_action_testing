@@ -24,3 +24,6 @@ if ("$env:GITHUB_ACTIONS" -eq "true") {
 dir
 mkdir artifacts
 cp *.jpg artifacts
+# will this cause a failure?
+cp *.gif artifacts
+echo "no whammy?"
