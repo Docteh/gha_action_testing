@@ -20,5 +20,5 @@ jobs:
       - name: Upload Build
         uses: actions/upload-artifact@v3
         with:
-          name: yuzu-msvc-pr${{ github.event.number }}-${{ env.BUILD_TAG }}
+          name: yuzu-msvc-${{ env.BUILD_TAG }}
           path: artifacts/
