@@ -3,6 +3,8 @@ name: 'pr verify'
 on:
   pull_request:
     branches: [ main ]
+env:
+  PR_NUMBER: pr${{ github.event.number }}
 jobs:
   build-msvc:
     name: 'test build (windows, msvc)'
