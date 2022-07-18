@@ -4,13 +4,19 @@ $GITDATE = $(git show -s --date=short --format='%ad') -replace "-", ""
 $GITREV = $(git show -s --format='%h')
 
 $GITSHA = $(git show -s --format='%H')
-if ("$GITSHA" -ne $env:GITHUB_SHA) {
+if ($GITSHA -ne $env:GITHUB_SHA) {
     echo "two hashes don't match, come back to this section later"
 } else {
     echo "two hashes do match"
 }
 echo "$env:GITHUB_SHA $GITREV"
 
+# ^ they are the same, need different idea
+
+if (Get-Variable -Name env:PR_HASH -ErrorAction SilentlyContinue) {
+    echo "Got PR_HASH from env, overriding GITREV"
+    $GITREV = $env:PR_HASH.Substring(9)
+}
 
 
 
