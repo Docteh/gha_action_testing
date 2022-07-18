@@ -13,11 +13,19 @@ echo "$env:GITHUB_SHA $GITREV"
 
 # ^ they are the same, need different idea
 
-if (Get-Variable -Name env:PR_HASH -ErrorAction SilentlyContinue) {
-    echo "Got PR_HASH from env, overriding GITREV"
-    $GITREV = $env:PR_HASH.Substring(9)
-}
+#if (Get-Variable -Name env:PR_HASH -ErrorAction SilentlyContinue) {
+#    echo "Got PR_HASH from env, overriding GITREV"
+#    $GITREV = $env:PR_HASH.Substring(9)
+#}
+# ^ this doesn't work with workflow_dispatch
+# having this line under env: caused error
+#  PR_HASH: {{ github.event.pull_request.head.sha }}
+# GHA error:
+# Invalid workflow file: .github/workflows/pr-verify.yml#L9
+# The workflow is not valid. .github/workflows/pr-verify.yml (Line: 9, Col: 12): A mapping was not expected
 
+echo "Showing last 3 commits`n"
+git log --oneline -n 3
 
 
 # Write out a tag for later steps (Probably Upload)
