@@ -31,7 +31,7 @@ if ($env:GITHUB_EVENT_NAME -eq "pull_request") {
     $GITREV_MERGE = $(git rev-parse HEAD)
     $GITREV_PULL = $(git rev-parse HEAD~1)
     $GITREV_MAIN = $(git rev-parse HEAD~2)
-    $GITREV = $GITREV_PULL.Substring(9)
+    $GITREV = $GITREV_PULL.Substring(0,9)
 }
 
 # Write out a tag for later steps (Probably Upload)
