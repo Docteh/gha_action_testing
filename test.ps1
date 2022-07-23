@@ -28,6 +28,7 @@ echo "`nShowing last 3 commits"
 git log --oneline -n 3
 
 if ($env:GITHUB_EVENT_NAME -eq "pull_request") {
+    # Turns out MERGE PULL MAIN doesn't work if the PR is dated earlier than main
     $GITREV_MERGE = $(git rev-parse HEAD)
     $GITREV_PULL = $(git rev-parse HEAD~1)
     $GITREV_MAIN = $(git rev-parse HEAD~2)
